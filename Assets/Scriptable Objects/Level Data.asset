@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4a83bc520913842963caed7a20b55c, type: 3}
+  m_Name: Level Data
+  m_EditorClassIdentifier: 
+  _enemyPrefabs:
+  - {fileID: 2605514286688591272, guid: 6a69ecd9cd1291e4dabf2486d2490d0b, type: 3}
+  - {fileID: 141726939909146277, guid: e67233a3880fa874e8a4b311ba0a90d2, type: 3}
+  - {fileID: 6837668757528151459, guid: 65d8a21b619d5da46a706fb9b0d0a7c1, type: 3}
+  _levelInfos:
+  - _enemySpeed: 20
+    _colCount: 10
+    _rowCount: 5

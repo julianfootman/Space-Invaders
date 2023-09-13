@@ -1,8 +1,14 @@
 using UnityEngine;
-using UnityEngine.XR;
 
 public class CharacterController : MonoBehaviour
 {
+    [Header("Movement Control")]
+    [Range(0f, 200f)]
+    [SerializeField] private float _xMoveLimit = 88;
+    [Range(0f, 200f)]
+    [SerializeField] private float _yMoveLimit = 88;
+    [Range(0.1f, 9f)]
+    [SerializeField] float _moveSpeed = 2f;
     [Header("Camera Control")]
     [SerializeField] private Transform _cameraTransform;
 
@@ -22,29 +28,42 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float _shootingRate = 0.5f;
     
     private float _shootingCooldown = 0;
-    
-        private Vector2 _rotation = Vector2.zero;
-    const string _xAxis = "Mouse X";
-    const string _yAxis = "Mouse Y";
+
+    const string _xMovementAxis = "Horizontal";
+    const string _yMovementAxis = "Vertical";
+    const string _xRotationAxis = "Mouse X";
+    const string _yRotationAxis = "Mouse Y";
+
+    private Vector2 _movement = Vector2.zero;
+    private Vector2 _rotation = Vector2.zero;
+    private Vector3 _originPos;
 
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         _shootingCooldown = 1 - _shootingRate;
+        _originPos = _cameraTransform.position;
     }
 
     void Update()
     {
         // camera control
-        _rotation.x += Input.GetAxis(_xAxis) * _sensitivity;
+        _rotation.x += Input.GetAxis(_xRotationAxis) * _sensitivity;
         _rotation.x = Mathf.Clamp(_rotation.x, -_xRotationLimit, _xRotationLimit);
-        _rotation.y += Input.GetAxis(_yAxis) * _sensitivity;
+        _rotation.y += Input.GetAxis(_yRotationAxis) * _sensitivity;
         _rotation.y = Mathf.Clamp(_rotation.y, -_yRotationLimit, _yRotationLimit);
         var xQuat = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         var yQuat = Quaternion.AngleAxis(_rotation.y, Vector3.left);
 
-        _cameraTransform.localRotation = xQuat * yQuat; 
+        _cameraTransform.localRotation = xQuat * yQuat;
+
+        // move control
+        _movement.x += Input.GetAxis(_xMovementAxis) * _moveSpeed;
+        _movement.x = Mathf.Clamp(_movement.x, -_xMoveLimit, _xMoveLimit);
+        _movement.y += Input.GetAxis(_yMovementAxis) * _moveSpeed;
+        _movement.y = Mathf.Clamp(_movement.y, -_yMoveLimit, _yMoveLimit);
+        _cameraTransform.position = _originPos + new Vector3(_movement.x, _movement.y, 0);
 
         // shooter control
 
