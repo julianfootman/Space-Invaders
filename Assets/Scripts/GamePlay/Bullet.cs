@@ -1,11 +1,11 @@
+using System.Linq;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _lifeTime = 2;
     [SerializeField] private GameObject _explisionVFX;
-    [SerializeField] private bool _destroyTargetInstantly;
-    [SerializeField] private string _enemyTag;
+    [SerializeField] private string[] _enemyTags;
 
     private void Start()
     {
@@ -14,19 +14,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == _enemyTag)
-        {            
-            if (_destroyTargetInstantly)
-            {
-                Destroy(other.gameObject);
-            }
-
+        if (_enemyTags.Contains(other.tag))
+        {
+            GameManager.Instance.OnHitTarget(other.gameObject);
             GameObject go = Instantiate(_explisionVFX);
             go.transform.position = transform.position;
             Destroy(go, 0.5f);
             Destroy(gameObject);
         }
     }
-
-
 }

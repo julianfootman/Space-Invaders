@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_BulletTrail_Red Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8406815242764361057, guid: 473d079eb020ad24184a63656bf54144, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406815242858142254, guid: 473d079eb020ad24184a63656bf54144, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8891389444157085588, guid: 473d079eb020ad24184a63656bf54144, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -92,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeTime: 2
   _explisionVFX: {fileID: 7819775807870019735, guid: f916833a9285b1244b9a2a6ef531b2a5, type: 3}
-  _destroyTargetInstantly: 0
-  _enemyTag: Player
+  _enemyTags:
+  - Player
 --- !u!135 &6133929003415027590
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,4 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ea0acb789143d45a905b5f8003308b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
+  _speed: 50

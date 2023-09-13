@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game Data", fileName = "Level Data")]
 public class LevelData : ScriptableObject
 {
+    [Header("Bonus")]
+    public GameObject _bonusPrefab;
+    [Header("Enemy")]
     public GameObject[] _enemyPrefabs;
     [Header("Level Informations")]
     [Space(10)]
@@ -21,5 +24,6 @@ public class LevelData : ScriptableObject
         [Header("Enemy Group Info")]
         public int _colCount;
         public int _rowCount;
+        public float _bonusAppearCoolDown = 10;
     }
 }

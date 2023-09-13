@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4a83bc520913842963caed7a20b55c, type: 3}
   m_Name: Level Data
   m_EditorClassIdentifier: 
+  _bonusPrefab: {fileID: 1328098456383625394, guid: 56cdb38f17228964da3e2dce4b8090a1, type: 3}
   _enemyPrefabs:
   - {fileID: 2605514286688591272, guid: 6a69ecd9cd1291e4dabf2486d2490d0b, type: 3}
   - {fileID: 141726939909146277, guid: e67233a3880fa874e8a4b311ba0a90d2, type: 3}
@@ -19,4 +20,5 @@ MonoBehaviour:
   _levelInfos:
   - _enemySpeed: 20
     _colCount: 10
-    _rowCount: 5
+    _rowCount: 2
+    _bonusAppearCoolDown: 20

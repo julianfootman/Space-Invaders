@@ -5,13 +5,11 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private float _shootingCoolDown;
     [SerializeField] private Transform _muzzle;
+    [SerializeField] private int _point = 10;
+    [SerializeField] private string _endTriggerTag = "EndTrigger";
 
+    public int Point => _point;
     private float _shootingTimer;
-
-    private void Awake()
-    {
-        
-    }
 
     private void Update()
     {
@@ -33,6 +31,14 @@ public class EnemyBehaviour : MonoBehaviour
     {
         _shootingTimer = 0;
         Instantiate(_bulletPrefab, transform.position, transform.rotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == _endTriggerTag)
+        {
+            GameManager.Instance.OnEndGame();
+        }
     }
 
 }

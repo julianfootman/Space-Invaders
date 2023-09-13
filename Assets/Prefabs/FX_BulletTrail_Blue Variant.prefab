@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2140854298265806263, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140854298884001470, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4868999187517079738, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -104,8 +112,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeTime: 2
   _explisionVFX: {fileID: 443653445314069269, guid: 7e3e8e2f6ecdbb04a982af0a14f2d887, type: 3}
-  _destroyTargetInstantly: 1
-  _enemyTag: Enemy
+  _enemyTags:
+  - Enemy
+  - Bonus
 --- !u!135 &3351228721670966126
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -139,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ea0acb789143d45a905b5f8003308b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
+  _speed: 50
 --- !u!54 &4325450249795283626
 Rigidbody:
   m_ObjectHideFlags: 0
