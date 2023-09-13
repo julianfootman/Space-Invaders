@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cfa9c6d5c7d7c9841b9cb9d9fa789357
+guid: a022267750016ce49a8f11e09211ff54
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -121,7 +121,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-set-collection-glossy-web-ui-button-green-blue-yellow-vector-png-image_7607033_0
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 229
+        width: 210
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 593f67ba74ba6c244abc49344a94ffbf
+      internalID: -81431274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-set-collection-glossy-web-ui-button-green-blue-yellow-vector-png-image_7607033_1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 143
+        width: 210
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c412486f63d34e84ea19fc9778357e7d
+      internalID: 2074321499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-set-collection-glossy-web-ui-button-green-blue-yellow-vector-png-image_7607033_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 56
+        width: 210
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 152e1dc3e93328a4f9df239dc5fd2ee9
+      internalID: 64276612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +195,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pngtree-set-collection-glossy-web-ui-button-green-blue-yellow-vector-png-image_7607033_0: -81431274
+      pngtree-set-collection-glossy-web-ui-button-green-blue-yellow-vector-png-image_7607033_1: 2074321499
+      pngtree-set-collection-glossy-web-ui-button-green-blue-yellow-vector-png-image_7607033_2: 64276612
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
