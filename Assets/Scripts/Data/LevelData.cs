@@ -5,22 +5,22 @@ public class LevelData : ScriptableObject
 {
     [Header("Bonus")]
     public GameObject _bonusPrefab;
-    [Header("Enemy")]
-    public GameObject[] _enemyPrefabs;
     [Header("Level Informations")]
     [Space(10)]
     public LevelInfo[] _levelInfos; 
 
-    public GameObject GetRandomEnemyPrefab()
+    public GameObject GetRandomEnemyPrefab(int level)
     {
-        int randomIndex = UnityEngine.Random.Range(0, _enemyPrefabs.Length);
-        return _enemyPrefabs[randomIndex];
+        int randomIndex = UnityEngine.Random.Range(0, _levelInfos[level]._enemyPrefabs.Length);
+        return _levelInfos[level]._enemyPrefabs[randomIndex];
     }
 
     [Serializable]
     public class LevelInfo
     {
         public int _enemySpeed;
+        [Header("Enemy")]
+        public GameObject[] _enemyPrefabs;
         [Header("Enemy Group Info")]
         public int _colCount;
         public int _rowCount;

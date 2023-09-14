@@ -13,20 +13,25 @@ MonoBehaviour:
   m_Name: Level Data
   m_EditorClassIdentifier: 
   _bonusPrefab: {fileID: 1328098456383625394, guid: 56cdb38f17228964da3e2dce4b8090a1, type: 3}
-  _enemyPrefabs:
-  - {fileID: 2605514286688591272, guid: 6a69ecd9cd1291e4dabf2486d2490d0b, type: 3}
-  - {fileID: 141726939909146277, guid: e67233a3880fa874e8a4b311ba0a90d2, type: 3}
-  - {fileID: 6837668757528151459, guid: 65d8a21b619d5da46a706fb9b0d0a7c1, type: 3}
   _levelInfos:
   - _enemySpeed: 20
+    _enemyPrefabs:
+    - {fileID: 2605514286688591272, guid: 6a69ecd9cd1291e4dabf2486d2490d0b, type: 3}
     _colCount: 2
     _rowCount: 2
     _bonusAppearCoolDown: 20
   - _enemySpeed: 30
+    _enemyPrefabs:
+    - {fileID: 2605514286688591272, guid: 6a69ecd9cd1291e4dabf2486d2490d0b, type: 3}
+    - {fileID: 141726939909146277, guid: e67233a3880fa874e8a4b311ba0a90d2, type: 3}
     _colCount: 4
     _rowCount: 2
     _bonusAppearCoolDown: 20
   - _enemySpeed: 40
+    _enemyPrefabs:
+    - {fileID: 2605514286688591272, guid: 6a69ecd9cd1291e4dabf2486d2490d0b, type: 3}
+    - {fileID: 141726939909146277, guid: e67233a3880fa874e8a4b311ba0a90d2, type: 3}
+    - {fileID: 6837668757528151459, guid: 65d8a21b619d5da46a706fb9b0d0a7c1, type: 3}
     _colCount: 10
     _rowCount: 3
     _bonusAppearCoolDown: 20

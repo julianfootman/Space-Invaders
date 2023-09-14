@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
 
     public void InitializeEnemyGroup()
     {
-
         var levelInfo = _levelData._levelInfos[_currentLevel];
         var colMargin = _colLimit * 2 / (levelInfo._colCount + 2);
        
@@ -175,7 +174,7 @@ public class GameManager : MonoBehaviour
             for (int row = 0; row < levelInfo._rowCount; row++)
             {
                 // clone random enemy prefab                    
-                GameObject enemyItem = Instantiate(_levelData.GetRandomEnemyPrefab(), _enemyGroup.transform);
+                GameObject enemyItem = Instantiate(_levelData.GetRandomEnemyPrefab(_currentLevel), _enemyGroup.transform);
                     enemyItem.transform.localPosition = new Vector3(col * colMargin, 0, row * _rowMargin);
             }
         }
