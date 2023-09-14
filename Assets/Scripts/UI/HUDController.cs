@@ -1,17 +1,18 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _hpText;
-    //[SerializeField] private Slider _hpSlider;
+    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private GameManager _gameManager;
 
-    private void Start()
+    private void OnEnable()
     {
-        GameManager.Instance.OnUpdateScore += OnUpdateScore;
-        GameManager.Instance.OnUpdateHP += OnUpdateHealthPoint;
+        _gameManager.OnUpdateScore += OnUpdateScore;
+        _gameManager.OnUpdateHP += OnUpdateHealthPoint;
+        _gameManager.OnUpdateLevel += OnUpdateLevel;
     }
 
     private void OnUpdateScore(int score)
@@ -22,5 +23,10 @@ public class HUDController : MonoBehaviour
     private void OnUpdateHealthPoint(int hp)
     {
         _hpText.text = hp.ToString();
+    }
+
+    private void OnUpdateLevel(int level)
+    {
+        _levelText.text = $"Level : {level}";
     }
 }

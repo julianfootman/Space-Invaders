@@ -14,7 +14,11 @@ public class ModalUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _confirmButton.onClick.AddListener(() => OnConfirm?.Invoke());
+        _confirmButton.onClick.AddListener(() =>
+        {
+            OnConfirm?.Invoke();
+            OnConfirm = null;
+        } );
         gameObject.SetActive(false);
     }
 
@@ -29,6 +33,5 @@ public class ModalUI : MonoBehaviour
     private void OnDisable()
     {
         Time.timeScale = 1;
-        OnConfirm = null;
     }
 }

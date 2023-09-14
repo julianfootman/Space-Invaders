@@ -4,7 +4,9 @@ public class EnemyGroupBehaviour : MonoBehaviour
 {
     // left and right movement
     [SerializeField] private float _speed;
+    [SerializeField] private float _speedIncreaseRate = 1;
     [SerializeField] private float _AICooldown = 2;
+    [SerializeField] private Movement _forwardMovement;
 
     public float movementLimit { get; set; }
 
@@ -12,11 +14,33 @@ public class EnemyGroupBehaviour : MonoBehaviour
     private float _movementX;
     private float _decisionTimer;
     private float _currentAxis;
+    private float _originalSpeed;
 
     private void Start()
     {
-        _originPosition = transform.localPosition;
+        _originalSpeed = _forwardMovement.Speed;
         _decisionTimer = _AICooldown;
+    }
+
+    public void IntializePosition(Vector3 position)
+    {
+        transform.localPosition = position;
+        _originPosition = transform.localPosition;
+    }
+
+    public void OnChildDestroyed()
+    {
+        _forwardMovement.Speed = _forwardMovement.Speed + _speedIncreaseRate;
+    }
+
+    public void CleanUp()
+    {
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        _forwardMovement.Speed = _originalSpeed;
     }
 
     private void Update()

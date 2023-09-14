@@ -4,10 +4,13 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
+    [Header("Button references")]
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _highScoreButton;
     [SerializeField] private Button _quitButton;
+    [Header("Other UIs")]
+    [SerializeField] private HUDController _HUDcontrol;
 
     private void Awake()
     {
@@ -30,12 +33,18 @@ public class MenuUI : MonoBehaviour
             _resumeButton.gameObject.SetActive(false);
             _startButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Game";
         }
-        
+
+        _HUDcontrol.gameObject.SetActive(false);
+        ModalUI.Instance.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
         Time.timeScale = 1;
+        if (GameManager.Instance.IsPlaying)
+        {
+            _HUDcontrol.gameObject.SetActive(true);
+        }
     }
 
     private void ResumeGame()
@@ -45,7 +54,7 @@ public class MenuUI : MonoBehaviour
     
     private void StartGame()
     {
-        GameManager.Instance.InitializeGame();
+        GameManager.Instance.StartGame();
     }
 
     private void OnHighScores()

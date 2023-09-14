@@ -167,6 +167,7 @@ MonoBehaviour:
   _shootingCoolDown: 3
   _muzzle: {fileID: 7566288061990662138}
   _point: 20
+  _endTriggerTag: EndTrigger
 --- !u!65 &7995241786324791512
 BoxCollider:
   m_ObjectHideFlags: 0

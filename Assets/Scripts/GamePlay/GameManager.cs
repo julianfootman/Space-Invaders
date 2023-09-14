@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +8,7 @@ public class GameManager : MonoBehaviour
     public bool IsPlaying => _isPlaying;
     public Action<int> OnUpdateScore;
     public Action<int> OnUpdateHP;
+    public Action<int> OnUpdateLevel;
 
     [Header("Boundary")]
     [SerializeField] private Vector2 _gameBoundary = new Vector2(100, 50);
@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string _enemyTag = "Enemy";
     [SerializeField] private string _bonusTag = "Bonus";
 
+    [Header("Others")]
+    [SerializeField] private MenuUI _menuUI;
+    [SerializeField] private HUDController _hudControl;
+    public Transform _bulletParent;
+
     private GameObject _bonusObject;
     private bool _isPlaying;
     private int _score;
@@ -39,26 +44,40 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _currentHP = _maxHP;
     }
 
-    private void Start()
+    public void StartGame()
     {
-        InitializeGame();
+        _currentHP = _maxHP;
+        _score = 0;
+        InitializeLevel(0);
     }
 
-    public void InitializeGame(int level = 0)
-    {        
-        _currentLevel = level;
+    public void InitializeLevel(int level)
+    {
+        Cleanup();        
+
+        _currentLevel = level;        
+        _hudControl.gameObject.SetActive(true);
         OnUpdateHP?.Invoke(_currentHP);
-        _mainPlayer.transform.position = new Vector3(0, 0, -_gameBoundary.y / 2);
+        OnUpdateLevel?.Invoke(_currentLevel + 1);
+
+        // initialize player info
+        _mainPlayer.transform.localPosition = new Vector3(0, 0, -_gameBoundary.y / 2);
+        _mainPlayer.gameObject.SetActive(true);
+
+        // initialize enemies
         InitializeEnemyGroup();
+
         var levelInfo = _levelData._levelInfos[_currentLevel];
         InvokeRepeating(nameof(GenerateBonusObject), levelInfo._bonusAppearCoolDown, levelInfo._bonusAppearCoolDown);
+
+        _isPlaying = true;
     }
 
     public void OnHitTarget(GameObject target)
     {
+        CancelInvoke(nameof(GenerateBonusObject));
         if (target.tag == _playerTag)
         {
             _currentHP--;
@@ -69,7 +88,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                ModalUI.Instance.ShowModal($"You have {_currentHP} live" + (_currentHP > 1?"s":"") + " available.", "Continue");
+                ModalUI.Instance.ShowModal($"You have {_currentHP} " + (_currentHP > 1?"lives":"life") + " available." , "Continue");
                 ModalUI.Instance.OnConfirm += OnContinueGame;
             }
         }
@@ -77,6 +96,7 @@ public class GameManager : MonoBehaviour
         {
             _score += target.GetComponent<EnemyBehaviour>().Point;
             Destroy(target);
+            _enemyGroup.OnChildDestroyed();
             OnUpdateScore?.Invoke(_score);
 
             if (_enemyGroup.transform.childCount == 0)
@@ -94,7 +114,6 @@ public class GameManager : MonoBehaviour
 
     public void OnEndGame()
     {
-
         if (_enemyGroup.transform.childCount == 0 && _currentHP > 0)
         {
             // you win
@@ -105,24 +124,26 @@ public class GameManager : MonoBehaviour
             // you lose
             ModalUI.Instance.ShowModal("You lose", "Main menu");
         }
+
+        _hudControl.gameObject.SetActive(false);
+        _mainPlayer.gameObject.SetActive(false);
+        _isPlaying = false;
+        ModalUI.Instance.OnConfirm += GoToMainMenu;
     }
 
     private void OnContinueGame()
     {
-        InitializeGame(_currentLevel);
+        InitializeLevel(_currentLevel);
     }
 
     private void GoToMainMenu()
     {
-
+        Cleanup();
+        _menuUI.gameObject.SetActive(true);
     }
 
     public void InitializeEnemyGroup()
     {
-        foreach(Transform trans in _enemyGroup.transform)
-        {
-            Destroy(trans.gameObject);
-        }
 
         var levelInfo = _levelData._levelInfos[_currentLevel];
         var colMargin = _colLimit * 2 / (levelInfo._colCount + 2);
@@ -133,13 +154,13 @@ public class GameManager : MonoBehaviour
             {
                 // clone random enemy prefab                    
                 GameObject enemyItem = Instantiate(_levelData.GetRandomEnemyPrefab(), _enemyGroup.transform);
-                    enemyItem.transform.localPosition
-                        = new Vector3(col * colMargin, 0, row * _rowMargin);
+                    enemyItem.transform.localPosition = new Vector3(col * colMargin, 0, row * _rowMargin);
             }
         }
 
         _enemyGroup.movementLimit = colMargin;
-        _enemyGroup.transform.position += new Vector3(levelInfo._colCount * colMargin / 2, 0, - _currentLevel * _rowMargin);
+        _enemyGroup.IntializePosition(
+            new Vector3((float)levelInfo._colCount * colMargin / 2f, 0, _gameBoundary.y / 2 - 5 - _currentLevel * _rowMargin));
     }
 
     private void GenerateBonusObject()
@@ -152,5 +173,15 @@ public class GameManager : MonoBehaviour
         float direction = UnityEngine.Random.value > 0.5f ? 1 : -1;
         _bonusObject.transform.position = new Vector3(_gameBoundary.x / 2 * direction, 0, _gameBoundary.y / 2);
         _bonusObject.transform.forward = _mainPlayer.transform.right * -direction;
+    }
+
+    private void Cleanup()
+    {
+        foreach (Transform trans in _bulletParent)
+        {
+            Destroy(trans.gameObject);
+        }
+
+        _enemyGroup.CleanUp();
     }
 }

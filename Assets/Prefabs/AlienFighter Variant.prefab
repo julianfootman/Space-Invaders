@@ -164,9 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 4561245205835107970, guid: e936de91a35951a43837726f05b9cb23, type: 3}
-  _shootingCoolDown: 3
+  _shootingCoolDown: 5
   _muzzle: {fileID: 8773861027480915038}
   _point: 10
+  _endTriggerTag: EndTrigger
 --- !u!65 &3128598760063368116
 BoxCollider:
   m_ObjectHideFlags: 0
