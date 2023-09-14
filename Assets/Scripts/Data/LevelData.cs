@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Game Data", fileName = "Level Data")]
+[CreateAssetMenu(menuName = "Game Data / Level Data", fileName = "Level Data")]
 public class LevelData : ScriptableObject
 {
     [Header("Bonus")]

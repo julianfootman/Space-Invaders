@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     [Header("Others")]
     [SerializeField] private MenuUI _menuUI;
     [SerializeField] private HUDController _hudControl;
+    [SerializeField] private ScoreData _scoreData;
     public Transform _bulletParent;
 
     private GameObject _bonusObject;
@@ -98,17 +99,36 @@ public class GameManager : MonoBehaviour
             Destroy(target);
             _enemyGroup.OnChildDestroyed();
             OnUpdateScore?.Invoke(_score);
-
-            if (_enemyGroup.transform.childCount == 0)
-            {
-                OnEndGame();
-            }
+            CancelInvoke(nameof(CheckForEnemies));
+            Invoke(nameof(CheckForEnemies), 1);
         }
         else if(target.tag== _bonusTag)
         {
             _score += _bonusPoint;
             Destroy(target);
             OnUpdateScore?.Invoke(_score);
+        }
+    }
+
+    private void CheckForEnemies()
+    {
+        if (_enemyGroup.transform.childCount == 0)
+        {
+            Invoke(nameof(OnLevelUp), 1);
+        }
+    }
+
+    private void OnLevelUp()
+    {
+        _currentLevel++;
+
+        if (_levelData._levelInfos.Length > _currentLevel)
+        {
+            InitializeLevel(_currentLevel);
+        }
+        else
+        {
+            OnEndGame();
         }
     }
 
@@ -125,9 +145,11 @@ public class GameManager : MonoBehaviour
             ModalUI.Instance.ShowModal("You lose", "Main menu");
         }
 
+        _scoreData.AddNewScore(_score);
         _hudControl.gameObject.SetActive(false);
         _mainPlayer.gameObject.SetActive(false);
         _isPlaying = false;
+
         ModalUI.Instance.OnConfirm += GoToMainMenu;
     }
 

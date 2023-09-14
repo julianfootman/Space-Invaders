@@ -19,6 +19,14 @@ MonoBehaviour:
   - {fileID: 6837668757528151459, guid: 65d8a21b619d5da46a706fb9b0d0a7c1, type: 3}
   _levelInfos:
   - _enemySpeed: 20
-    _colCount: 10
+    _colCount: 2
     _rowCount: 2
+    _bonusAppearCoolDown: 20
+  - _enemySpeed: 30
+    _colCount: 4
+    _rowCount: 2
+    _bonusAppearCoolDown: 20
+  - _enemySpeed: 40
+    _colCount: 10
+    _rowCount: 3
     _bonusAppearCoolDown: 20
